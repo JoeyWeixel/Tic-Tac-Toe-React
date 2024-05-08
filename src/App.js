@@ -60,7 +60,7 @@ export default function Game() {
         <ol>{/*TODO*/}</ol>
       </div>
     </div>
-  )
+  );
 }
 
 function Square({value, onSquareClick}) {
