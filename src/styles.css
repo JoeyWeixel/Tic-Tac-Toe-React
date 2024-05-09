@@ -54,6 +54,10 @@ body {
   font-family: sans-serif;
   margin: 20px;
   padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .square {
@@ -82,11 +86,23 @@ body {
 }
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 100px;
 }
 
 .game-info {
   margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .highlight-tile {
