@@ -43,19 +43,20 @@ function Board({ xIsNext, squares, onPlay }) {
 };
 
 export default function Game() {
-  const [[history, isAscending], setHistory] = useState([[Array(9).fill(null)], true]);
+  const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [isAscending, setIsAscending] = useState(true);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
   function handlePlay(nextSquares) {
-    const nextHistory = [[...history.slice(0, currentMove + 1), nextSquares], isAscending];
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
 
   function handleToggleMovesOrder() {
-    setHistory([[...history], !isAscending]);
+    setIsAscending(!isAscending);
   }
 
   function jumpTo(nextMove) {
@@ -83,7 +84,7 @@ export default function Game() {
       </div>
       <div className="game-info">
         <button onClick={() => handleToggleMovesOrder()}>Toggle Move Ordering</button>
-        <ol key={1}>{isAscending ? moves:moves.slice(0).reverse}</ol>
+        <ol key={1}>{isAscending ? moves:moves.slice().reverse()}</ol>
       </div>
     </div>
   );
