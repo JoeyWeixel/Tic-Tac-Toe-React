@@ -1,9 +1,14 @@
 import { useState } from 'react';
 
 function Board({ xIsNext, squares, onPlay }) {
+  const [highlight, setHighlight] = useState([]);
 
   function handleClick(i) {
-    if (squares[i] || calculateWinner(squares)) {
+    if (!squares.includes(null) || calculateWinner(squares)){
+      handleEndgame();
+      return;
+    }
+    if (squares[i]) {
       return;
     }
     const nextSquares = squares.slice();
@@ -11,13 +16,14 @@ function Board({ xIsNext, squares, onPlay }) {
     onPlay(nextSquares);
   }
 
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = "Winner: " + (xIsNext ? "O" : "X");
-
-  } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+  let status = "Next player: " + (xIsNext ? "X" : "O");
+  function handleEndgame(){
+    const indexes = calculateWinner(squares);
+    if (indexes){
+      status = "Winner: " + (xIsNext ? "O" : "X");
+      setHighlight(indexes)
+    }
+    status = "Cats game!"
   }
 
   const boardTiles = (() => {
@@ -27,7 +33,11 @@ function Board({ xIsNext, squares, onPlay }) {
       for(let j=0; j<3; j++){
         const currentTile = 3*i+j;
         tileArray.push(
-          <Square key={i + '-' + j} value={squares[currentTile]} onSquareClick={() => handleClick(currentTile)} />);
+          <Square key={i + '-' + j} 
+            value={squares[currentTile]} 
+            onSquareClick={() => handleClick(currentTile)} 
+            className={highlight.includes(currentTile ? "highlight-tile" : "")}
+            />);
       }
       const row = <div key={i} className='board-row'>{tileArray}</div>
       rowArray.push(row);
