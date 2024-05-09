@@ -14,7 +14,8 @@ function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = "Winner: " + (xIsNext ? "O" : "X");
+
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
@@ -63,16 +64,25 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-  const moves = history.map((squares, move) => {
+  const moves = history.map((squares, move, h) => {
+    let moveInfo;
+    if(move !== 0){
+      const lastSquares = h[move-1];
+      const diff = squares.map((value, i) => value !== lastSquares[i]);
+      const moveType = move % 2 !== 0 ? "X" : "O";
+      const index = diff.indexOf(true);
+      moveInfo = "Move: "+ moveType + " at " + Math.floor(index/3) + ", " + index % 3;
+    }
+
     let description;
     if(move > 0) {
-      description = 'Go to move #' + move;
+      description = 'Go to move #' + move + " " + moveInfo;
     } else{
       description = 'Go to game start';
     }
     return (
       <li key={move}>
-          {(move === currentMove) ? ("You are at move #" + move) : <button onClick={() => jumpTo(move)}>{description}</button>}
+          {(move === currentMove) ? (move === 0 ? ("Game Start") : ("You are at move #" + move + " " + moveInfo)) : <button onClick={() => jumpTo(move)}>{description}</button>}
       </li>
     );
   });
@@ -112,7 +122,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return lines[i];
     }
   }
   return null;
