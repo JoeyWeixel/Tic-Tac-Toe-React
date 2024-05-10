@@ -19,7 +19,6 @@ function Board({ xIsNext, squares, onPlay }) {
   }else if (!squares.includes(null)){
     status = "Cats game!";
   }
-  console.log(highlight);
 
   const boardTiles = (() => {
     const rowArray = [];
@@ -31,7 +30,7 @@ function Board({ xIsNext, squares, onPlay }) {
           <Square key={i + '-' + j} 
             value={squares[currentTile]} 
             onSquareClick={() => handleClick(currentTile)} 
-            className={(highlight.includes(currentTile) ? "highlight-tile" : "")}
+            className={highlight.includes(currentTile) ? "highlight-tile" : ""}
             />);
       }
       const row = <div key={i} className='board-row'>{tileArray}</div>
@@ -99,16 +98,15 @@ export default function Game() {
       </div>
       <div className="game-info">
         <button onClick={() => handleToggleMovesOrder()}>Toggle Move Ordering</button>
-        <ol key={1}>{isAscending ? moves:moves.slice().reverse()}</ol>
+        <ol>{isAscending ? moves:moves.slice().reverse()}</ol>
       </div>
     </div>
   );
 }
 
 function Square({index, value, onSquareClick, className}) {
-  console.log(className);
   return (
-    <button key={index} className={"square " + className} onClick={onSquareClick} c>
+    <button key={index} className={"square " + className.toString()} onClick={onSquareClick} c>
       {value}
     </button>
   );
