@@ -97,7 +97,7 @@ export default function Game() {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <button onClick={() => handleToggleMovesOrder()}>Toggle Move Ordering</button>
+        <button className="toggle" onClick={() => handleToggleMovesOrder()}>Toggle Move Ordering</button>
         <ol>{isAscending ? moves:moves.slice().reverse()}</ol>
       </div>
     </div>
