@@ -104,11 +104,14 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 50%;
+  height: 350px;
+  overflow: auto;
+  scrollbar-width: 5px;
+  scrollbar-color: var(--secondary-color) #383838;
 }
 
 ol {
-  padding: 0;
+  padding: 0px 10px 0px 10px;
   list-style-type: none;
   display: flex;
   flex-direction: column;
