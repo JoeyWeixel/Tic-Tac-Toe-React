@@ -1,11 +1,15 @@
 * {
   box-sizing: border-box;
+  --main-bg-color: #282828;
+  --secondary-color: #E0E0E0;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
   font-family: sans-serif;
   margin: 20px;
   padding: 0;
+  background-color: var(--main-bg-color);
 }
 
 h1 {
@@ -54,21 +58,29 @@ body {
   font-family: sans-serif;
   margin: 20px;
   padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .square {
-  background: #fff;
-  border: 1px solid #999;
+  background: var(--main-bg-color);
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
   float: left;
-  font-size: 24px;
+  font-size: 48px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  line-height: 68px;
+  height: 68px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 68px;
+  border-radius: 5px;
+  margin: .5px;
 }
 
 .board-row:after {
@@ -79,16 +91,69 @@ body {
 
 .status {
   margin-bottom: 10px;
+  color: var(--secondary-color);
+  font-size: 24px;
 }
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 100px;
+  height: 100%;
 }
 
 .game-info {
-  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 350px;
+  overflow: auto;
+  scrollbar-width: 5px;
+  scrollbar-color: var(--secondary-color) #383838;
+}
+
+ol {
+  padding: 0px 10px 0px 10px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+ol li{
+  margin: 0 auto 0 auto;
+  color: var(--secondary-color);
+}
+
+.game-info button {
+  width: 250px;
+  height: 2rem;
+  background-color: transparent;
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  color: var(--secondary-color);
+  
+}
+
+.game-info .toggle{
+  background-color: rgba(255, 0, 0, 0.15);
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
 }
 
 .highlight-tile {
-  background-color: yellow;
+  background-color: rgb(255, 255, 0, .3);
+}
+
+.root{
+  height: max-content;
+  width: 75vw;
 }
