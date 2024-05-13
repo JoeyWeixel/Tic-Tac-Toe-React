@@ -79,6 +79,8 @@ body {
   padding: 0;
   text-align: center;
   width: 68px;
+  border-radius: 5px;
+  margin: .5px;
 }
 
 .board-row:after {
